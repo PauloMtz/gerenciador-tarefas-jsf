@@ -1,0 +1,7 @@
+.btn-sair {
+	text-align:center;
+}
+.btn-sair:hover {
+	background:#eee;
+	color:purple;
+}

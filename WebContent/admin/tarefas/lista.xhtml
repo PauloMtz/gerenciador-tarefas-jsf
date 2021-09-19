@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="../../WEB-INF/layout/template.xhtml">
+	<ui:define name="conteudo">
+		
+		<f:metadata>
+			<f:viewParam name="concluir_tarefa" value="#{tarefaBean.concluir}" />
+			<f:viewAction action="#{tarefaBean.concluirTarefa}" />
+			<f:viewParam name="excluir_tarefa" value="#{tarefaBean.excluir}" />
+			<f:viewAction action="#{tarefaBean.remover}" />
+		</f:metadata>
+	
+		<div class="container" style="min-height:750px">
+			<h3 style="margin-top:20px">Lista de tarefas</h3><hr/>
+			
+			<h:panelGroup library="css" name="bootstrap.min.css" rendered="#{!facesContext.messageList.isEmpty()}"> 
+				<h:messages class="alert alert-info" />
+			</h:panelGroup>
+			
+			<div style="text-align: right;margin-bottom: 20px;margin-right: 10px;">
+				<h:link outcome="/admin/tarefas/cadastro" value="Incluir tarefa" class="btn btn-info" />
+			</div>
+			
+			<ui:repeat var="tarefa" value="#{tarefaBean.tarefas}">
+			<div style="margin: 10px">
+				<div class="card bg-light mb-3">
+					<div class="card-header" style="font-weight: bold">#{tarefa.titulo}</div>
+					<div class="card-body">
+						<p><h:outputText value="#{tarefa.descricao}" styleClass="card-text"/></p>
+						
+						<p><div class="row">
+							<div class="col-4">
+								<span>Incluído em: </span>
+								<b><h:outputText value="#{tarefa.dataCadastro}">
+								      <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+								</h:outputText></b>
+							</div>
+							
+							<div class="col-4">
+								<span>Finaliza em: </span>
+								<b><h:outputText value="#{tarefa.dataConclusao}" styleClass="card-text">
+									<f:convertDateTime type="Date" pattern="dd/MM/yyyy" />
+								</h:outputText></b>
+							</div>
+						</div></p>
+						
+						<p><span>Status: </span>
+							<b><h:outputText value="#{tarefa.concluidaAsString}" styleClass="card-text"/></b></p>
+					</div>
+					
+					<div class="card-footer bg-light">
+						<p><h:form>
+							<h:link value="Alterar" outcome="cadastro" style="margin-right:10px">
+								<f:param name="editar_tarefa" value="#{tarefa.id}" />
+							</h:link> |
+							
+							<h:link value="Excluir" outcome="lista" style="margin-left:10px;margin-right:10px"
+								onclick="return confirm('Deseja realmente excluir esse registro?')">
+							    <f:param name="excluir_tarefa" value="#{tarefa.id}" />
+							</h:link> |
+							
+							<h:link value="Concluir" outcome="lista" style="margin-left:10px"
+								onclick="return confirm('Deseja realmente marcar essa tarefa como concluída?')"
+								disabled="#{tarefa.concluidaAsString == 'Concluído'}">
+								<f:param name="concluir_tarefa" value="#{tarefa.id}" />
+							</h:link>
+						</h:form></p>
+					</div>
+				</div>
+			</div>
+			</ui:repeat>
+		</div><hr/>
+	
+	</ui:define>
+</ui:composition>
+</html>

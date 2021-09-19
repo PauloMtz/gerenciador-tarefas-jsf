@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Tarefas</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/img/favicon.png"/>
+</h:head>
+<h:body style="background-color:#FAFAFA">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Gerenciador de tarefas</a>
+		<button class="navbar-toggler" type="button" data-toglle="collapse"
+			data-target="#navbar-app">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+
+	<div class="container col-4" style="min-height:750px;margin-top:40px">
+		<h3 style="margin-top:20px">Login</h3><hr/>
+		
+		<h:form id="form">
+	
+			<h:messages class="alert alert-danger" />
+			
+			<div class="col-12">
+				<div class="form-group">
+			        <h:outputLabel for="email"  value="E-mail" />
+		            <h:inputText id="email" value="#{loginBean.usuario.email}" styleClass="form-control"
+		            	label="E-mail" requiredMessage="Preencha o campo de e-mail">
+		            	<f:validateRequired />
+		            </h:inputText>
+				</div>
+				
+				<div class="form-group">
+			        <h:outputLabel for="senha" value="Senha" />
+		            <h:inputSecret id="senha" value="#{loginBean.usuario.senha}" styleClass="form-control"
+		            	requiredMessage="Informe a senha">
+		            	<f:validateRequired />
+		            </h:inputSecret>
+				</div>
+			
+				<div class="form-group">
+					<h:commandButton value="Entrar" action="#{loginBean.entrar}"
+						styleClass="btn btn-primary" style="width: 150px" />
+				</div>
+			</div>
+		</h:form>
+	</div>
+	
+	<div class="container" style="border-top:1px solid #ccc">
+    	<span class="text-muted">Gerenciador de Tarefas | 2021</span>
+   	</div>
+
+</h:body>
+</html>

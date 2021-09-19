@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="../../WEB-INF/layout/template.xhtml">
+	<ui:define name="conteudo">
+	
+		<f:metadata>
+			<f:viewParam name="editar_tarefa" value="#{tarefaBean.editar}" />
+			<f:viewAction action="#{tarefaBean.carregar}" />
+		</f:metadata>
+	
+		<div class="container" style="min-height:750px">
+			<h3 style="margin-top:20px">Inserir nova tarefa</h3><hr/>
+			
+			<h:form id="form" styleClass="form-horizontal">
+				
+				<h:messages class="alert alert-danger" />
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<h:outputLabel value="Título" />
+						<h:inputText styleClass="form-control" required="true" id="titulo"
+							requiredMessage="O campo título é obrigatório"
+							value="#{tarefaBean.tarefa.titulo}" />
+						<h:message for="titulo" style="color:red" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<h:outputLabel value="Descrição" />
+						<h:inputTextarea styleClass="form-control" required="true" id="descricao"
+							requiredMessage="O campo descrição é obrigatório"
+							value="#{tarefaBean.tarefa.descricao}" />
+						<h:message for="descricao" style="color:red" />
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-4">
+						<h:outputLabel value="Data de expiração" />
+						<h:inputText styleClass="form-control" maxlength="10" id="_data" required="true"
+							requiredMessage="Informe uma data de expiração" onkeypress="mascaraData()"
+							value="#{tarefaBean.tarefa.dataConclusao}" label="Data de expiração">
+							<f:convertDateTime type="LocalDate" pattern="dd/MM/yyyy"/>
+						</h:inputText>
+					</div>
+				</div>
+				
+				<h:commandButton value="Salvar" action="#{tarefaBean.salvar}" 
+					styleClass="btn btn-primary" style="width: 150px" />
+					
+				<h:link outcome="lista.xhtml" value="Voltar" class="btn btn-default" 
+					style="width:150px;border:1px solid #ccc;margin-left:10px" />
+			</h:form>
+		</div><hr/>
+	
+	</ui:define>
+</ui:composition>
+</html>

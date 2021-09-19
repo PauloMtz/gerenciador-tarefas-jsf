@@ -1,0 +1,155 @@
+<html xmlns="htth://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="../../WEB-INF/layout/template.xhtml">
+	<ui:define name="conteudo">
+		
+		<f:metadata>
+			<f:viewParam name="id_usuario" value="#{usuarioBean.idUsuario}" />
+			<f:viewAction action="#{usuarioBean.carregar}" />
+		</f:metadata>
+
+		<div class="container" style="min-height:750px">
+			<h3 style="margin-top:20px">Cadastro de usuario</h3><hr/>
+			
+			<h:form id="form">
+		
+				<h:messages class="alert alert-danger" />
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+				        <h:outputLabel for="nome" value="Nome" />
+			            <h:inputText id="nome" value="#{usuarioBean.usuario.nome}" label="Nome"
+			            	styleClass="form-control" requiredMessage="Preencha o campo nome">
+			            	<f:validateRequired />
+		            	</h:inputText>
+					</div>
+					
+					<div class="form-group col-md-3">
+				        <h:outputLabel for="data_nasc" value="Data de Nascimento" />
+			            <h:inputText value="#{usuarioBean.usuario.dataNascimento}" styleClass="form-control"
+			            	id="_data" maxlength="10" onkeypress="mascaraData()" label="Data de Nascimento">
+			            	<f:convertDateTime type="Date" pattern="dd/MM/yyyy"/>
+		            	</h:inputText>
+				    </div>
+					
+					<div class="form-group col-md-3">
+				        <h:outputLabel for="sexo" value="Sexo" styleClass="form-check-label" />
+			            <h:selectOneRadio id="sexo" value="#{usuarioBean.usuario.sexo}">
+						    <f:selectItem itemLabel="Masc" itemValue="M" styleClass="form-check-input" />
+						    <f:selectItem itemLabel="Fem" itemValue="F" styleClass="form-check-input" />
+						</h:selectOneRadio>
+				    </div>
+			    </div>
+				
+				<div class="row">
+					<div class="form-group col-md-3">
+				        <h:outputLabel for="cpf" value="CPF" />
+			            <h:inputText value="#{usuarioBean.usuario.cpf}" styleClass="form-control"
+			            	id="cpf" onkeypress="mascaraCPF()" maxlength="14">
+			            	<f:ajax event="keypress" />
+			            </h:inputText>
+					</div>
+					
+					<div class="form-group col-md-3">
+				        <h:outputLabel for="rg" value="RG" />
+			            <h:inputText value="#{usuarioBean.usuario.rg}" styleClass="form-control"
+			            	id="rg" maxlength="9" onkeypress="mascaraRG()">
+			            	<f:ajax event="keypress" />
+			            </h:inputText>
+					</div>
+					
+					<div class="form-group col-md-2">
+				        <h:outputLabel for="ddd" value="DDD" />
+			            <h:inputText value="#{usuarioBean.usuario.ddd}" styleClass="form-control"
+			            	id="ddd" maxlength="4" onkeypress="mascaraDDD()">
+			            	<f:ajax event="keypress" />
+		            	</h:inputText>
+					</div>
+					
+					<div class="form-group col-md-4">
+				        <h:outputLabel for="celular" value="Celular" />
+			            <h:inputText value="#{usuarioBean.usuario.celular}" styleClass="form-control"
+			            	id="celular" maxlength="10" onkeypress="mascaraCelular()">
+			            	<f:ajax event="keypress" />
+			            </h:inputText>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="form-group col-md-3">
+				        <h:outputLabel for="cep" value="CEP" />
+			            <h:inputText value="#{usuarioBean.usuario.cep}" styleClass="form-control" id="cep" 
+			            	maxlength="10" onblur="pesquisacep(this.value)" onkeypress="mascaraCep()">
+			            	<f:ajax event="keypress" />
+			            </h:inputText>
+					</div>
+					
+					<div class="form-group col-md-3">
+				        <h:outputLabel for="uf" value="UF" />
+			            <h:inputText id="uf" value="#{usuarioBean.usuario.uf}" styleClass="form-control"
+			            	maxlength="2" />
+					</div>
+					
+					<div class="form-group col-md-6">
+				        <h:outputLabel for="cidade" value="Cidade" />
+				        <h:inputText id="cidade" value="#{usuarioBean.usuario.cidade}" styleClass="form-control" />
+					</div>
+				</div>
+				
+				<div class="row">					
+					<div class="form-group col-md-6">
+						<h:outputLabel for="endereco" value="Endereco" />
+			            <h:inputText id="endereco" value="#{usuarioBean.usuario.endereco}" styleClass="form-control" />
+					</div>
+					
+					<div class="form-group col-md-6">
+				        <h:outputLabel for="bairro" value="Bairro" />
+			            <h:inputText id="bairro" value="#{usuarioBean.usuario.bairro}" styleClass="form-control" />
+					</div>
+				</div>
+				
+				<h5 style="margin-top:20px">Dados de acesso</h5><hr/>
+				
+				<div class="row">
+					<div class="form-group col-md-4">
+				        <h:outputLabel for="email"  value="E-mail" />
+			            <h:inputText id="email" value="#{usuarioBean.usuario.email}" styleClass="form-control"
+			            	label="E-mail" requiredMessage="Preencha o campo de e-mail">
+			            	<f:validateRequired />
+			            </h:inputText>
+					</div>
+					
+					<div class="form-group col-md-4">
+				        <h:outputLabel for="login"  value="Login" />
+			            <h:inputText id="login" value="#{usuarioBean.usuario.login}" styleClass="form-control"
+			            	label="Login" requiredMessage="Preencha o campo de login">
+			            	<f:validateRequired />
+			            </h:inputText>
+					</div>
+					
+					<div class="form-group col-md-4">
+				        <h:outputLabel for="senha" styleClass="p-col-6 p-md-2" value="Senha" />
+			            <h:inputSecret id="senha" value="#{usuarioBean.usuario.senha}" styleClass="form-control"
+			            	style="margin-top:-15px" />
+					</div>
+				</div><hr/>
+				
+				<div class="row" style="margin-top:20px">
+					<div class="form-group col-md-6">
+						<h:commandButton value="Salvar" action="#{usuarioBean.gravar}"
+							styleClass="btn btn-primary" style="width: 150px" />
+							
+						<h:link outcome="lista.xhtml" value="Voltar" class="btn btn-default"
+							style="width:150px;border:1px solid #ccc;margin-left:10px" />
+					</div>
+				</div>
+			</h:form>
+		</div>
+		<hr />
+
+	</ui:define>
+</ui:composition>
+</html>

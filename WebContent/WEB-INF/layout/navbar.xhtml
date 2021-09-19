@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Gerenciador de tarefas</a>
+			</div>
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<h:link outcome="/admin/tarefas/lista" class="nav-item nav-link">Tarefas</h:link>
+					<h:link outcome="/admin/usuarios/lista" class="nav-item nav-link">Usuários</h:link>
+				</ul>
+			</div>
+		</div>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="dropdown"><a href="#" class="dropdown-toggle nav-item nav-link"
+				data-toggle="dropdown" role="button" aria-haspopup="true"
+				aria-expanded="false">#{loginBean.usuario.nome} 
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<h:form>
+						<h:commandLink action="#{loginBean.sair}" value="Sair" 
+							class="nav-item nav-link btn-sair" style="color:black" />
+					</h:form>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</html>
